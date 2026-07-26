@@ -1,0 +1,42 @@
+{
+  "$comment": "Curated shortlist for the profile. Stars, forks and language are pulled live from the GitHub API at build time — only the prose lives here.",
+  "owner": "Lord-shaban",
+  "projects": [
+    {
+      "repo": "Nota",
+      "title": "Nota",
+      "blurb": "Notes and diary app that files your entries for you. Capture by text, voice or image; the model sorts them into categories.",
+      "stack": ["Flutter", "Firebase", "AI"]
+    },
+    {
+      "repo": "lord-ai",
+      "title": "LORD AI",
+      "blurb": "Assistant running Llama 3.3 70B on Groq's LPU, so replies land almost instantly. Ships a music player and zero dependencies.",
+      "stack": ["JavaScript", "Groq", "LLM"]
+    },
+    {
+      "repo": "Classic-Barber-App",
+      "title": "Classic Barber",
+      "blurb": "Booking app for barber shops with a live queue customers can watch, plus WhatsApp confirmations. Built Arabic-first.",
+      "stack": ["Flutter", "Firebase", "Realtime"]
+    },
+    {
+      "repo": "lordlitor",
+      "title": "Lordlitor",
+      "blurb": "Mental-arithmetic trainer in the shape of a language app. 21 calculation patterns across 5 categories, difficulty adapts as you go.",
+      "stack": ["Flutter", "Dart"]
+    },
+    {
+      "repo": "top10-game",
+      "title": "Top 10",
+      "blurb": "Real-time football trivia. You and your friends race to name the top ten before anyone else does.",
+      "stack": ["JavaScript", "Realtime"]
+    },
+    {
+      "repo": "neurobalance",
+      "title": "NeuroBalance",
+      "blurb": "Cognitive training experiment — testing whether short daily drills hold attention better than long sessions.",
+      "stack": ["Flutter", "Dart"]
+    }
+  ]
+}

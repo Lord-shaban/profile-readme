@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 38" width="96" height="38" role="img" aria-label="Email">
+  <title>Email</title>
+  <defs>
+    
+    <style>
+      .serif { font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif; }
+      .mono  { font-family: ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, Consolas, monospace; }
+      .ar    { font-family: "Noto Naskh Arabic", "Amiri", "Traditional Arabic", "Segoe UI", Tahoma, serif; }
+      
+      
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; }
+    .anim { opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; }
+  }
+    </style>
+  </defs>
+  <rect width="96" height="38" fill="#0B0F14"/>
+
+  <rect x="0.5" y="0.5" width="95" height="37" rx="2" fill="#10161E" stroke="#3FA79F" stroke-opacity="0.38"/>
+  <rect x="0" y="0" width="2.5" height="38" fill="#3FA79F" fill-opacity="0.85"/>
+  <text class="serif" x="25" y="25" text-anchor="middle" font-size="17" fill="#3FA79F" fill-opacity="0.95">@</text>
+  <line x1="39" y1="9" x2="39" y2="29" stroke="#3FA79F" stroke-opacity="0.22"/>
+  <text class="mono" x="45" y="23" font-size="11.5" letter-spacing="0.4" fill="#F2E9D8" fill-opacity="0.88">Email</text>
+</svg>

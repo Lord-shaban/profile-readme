@@ -1,0 +1,19 @@
+{
+  "name": "profile-readme",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Generates every SVG on Ahmed Sha'ban's GitHub profile from one design system and live GitHub data.",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "npm run build:terminal && npm run build:badges && npm run build:cards && npm run build:stats",
+    "build:terminal": "node scripts/build-terminal.mjs",
+    "build:badges": "node scripts/build-badges.mjs",
+    "build:cards": "node scripts/build-cards.mjs",
+    "build:stats": "node scripts/build-stats.mjs",
+    "check": "node scripts/check-assets.mjs"
+  },
+  "license": "MIT"
+}

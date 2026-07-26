@@ -1,0 +1,56 @@
+name: Refresh profile assets
+
+on:
+  schedule:
+    - cron: "0 4 * * *"      # daily, 04:00 UTC — an hour after the snake
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/**"
+      - "data/**"
+      - "package.json"
+      - ".github/workflows/refresh.yml"
+
+# Only one refresh at a time, so two runs can never race to commit assets.
+concurrency:
+  group: refresh-assets
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # PROFILE_TOKEN is optional: a classic PAT with `read:user` makes the
+      # contribution count include private repositories. Without it the build
+      # still succeeds and simply reports public contributions.
+      - name: Build every asset
+        run: npm run build
+        env:
+          GITHUB_TOKEN: ${{ secrets.PROFILE_TOKEN || secrets.GITHUB_TOKEN }}
+
+      - name: Check the assets and the README references
+        run: npm run check
+        env:
+          GITHUB_TOKEN: ${{ secrets.PROFILE_TOKEN || secrets.GITHUB_TOKEN }}
+
+      - name: Commit only if something actually changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets
+          if git diff --cached --quiet; then
+            echo "Assets are already up to date — nothing to commit."
+            exit 0
+          fi
+          git commit -m "chore: refresh profile assets"
+          git push

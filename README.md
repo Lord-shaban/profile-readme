@@ -1,34 +1,41 @@
-<img src="assets/header.svg" alt="Ahmed Sha'ban — Software Engineer, Flutter & Laravel, AI" width="100%" />
+<img src="assets/header.svg" alt="Ahmed Sha'ban — Software Engineer, Flutter &amp; Laravel, AI" width="100%" />
+
+<img src="assets/terminal.svg" alt="Terminal session: Ahmed Sha'ban, software engineering student at Nile University and team lead at Abakera NU. Focused on Laravel, Firebase Cloud, and putting LLMs into products that ship. Principles: arabic-first, rtl-from-day-one, finished-over-clever." width="100%" />
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/ahmed-sha-ban-006a24309/"><img src="https://img.shields.io/badge/LinkedIn-0B0F14?style=flat-square&logo=linkedin&logoColor=C9A227&labelColor=0B0F14" alt="LinkedIn" /></a>
-  <a href="https://x.com/AhmdShbnn"><img src="https://img.shields.io/badge/X-0B0F14?style=flat-square&logo=x&logoColor=C9A227&labelColor=0B0F14" alt="X" /></a>
-  <a href="https://www.facebook.com/profile.php?id=100010999923328"><img src="https://img.shields.io/badge/Facebook-0B0F14?style=flat-square&logo=facebook&logoColor=C9A227&labelColor=0B0F14" alt="Facebook" /></a>
-  <img src="https://img.shields.io/badge/6th%20of%20October%2C%20Egypt-0B0F14?style=flat-square&logoColor=C9A227&labelColor=0B0F14" alt="Location" />
+  <a href="https://www.linkedin.com/in/ahmed-sha-ban-006a24309/"><img src="assets/badges/linkedin.svg" alt="LinkedIn" height="38" /></a>
+  <a href="https://x.com/AhmdShbnn"><img src="assets/badges/x.svg" alt="X / Twitter" height="38" /></a>
+  <a href="https://www.facebook.com/profile.php?id=100010999923328"><img src="assets/badges/facebook.svg" alt="Facebook" height="38" /></a>
+  <a href="mailto:a.shaban2366@nu.edu.eg"><img src="assets/badges/email.svg" alt="Email" height="38" /></a>
+  <img src="assets/badges/location.svg" alt="Based in 6th of October, Egypt" height="38" />
 </p>
 
 ---
 
-I'm a software engineering student at **Nile University** who ships finished products rather than practice projects. Booking systems with live queues, multiplayer games with real-time state, AI assistants that answer in under a second.
+I ship finished products rather than practice projects. Booking systems with live queues, multiplayer games with real-time state, AI assistants that answer in under a second.
 
 Most of them ship **Arabic-first** — real RTL layout designed from the start, not a translation bolted on at the end. That's the part I care about: good software shouldn't feel like a foreign import to the people using it.
-
-Right now I'm going deeper on Laravel and Firebase Cloud, and building more of my apps around LLMs. I also lead the team at **Abakera NU**.
 
 ---
 
 ## Selected work
 
-| Project | What it does | Stack |
-| :-- | :-- | :-- |
-| **[Nota](https://github.com/Lord-shaban/Nota)** | Notes and diary app that files your entries for you. Capture by text, voice or image; AI sorts them into categories. Full Arabic support. | Flutter · Firebase |
-| **[LORD AI](https://github.com/Lord-shaban/lord-ai)** | AI assistant running Llama 3.3 70B on Groq's LPU, so replies land almost instantly. Ships with a music player and **zero dependencies**. | JavaScript · Groq |
-| **[Classic Barber](https://github.com/Lord-shaban/Classic-Barber-App)** | Booking app for barber shops with a live queue customers can watch, plus WhatsApp confirmations. Built Arabic-first. | Flutter · Firebase |
-| **[Lordlitor](https://github.com/Lord-shaban/lordlitor)** | Mental-arithmetic trainer in the shape of a language app. 21 calculation patterns across 5 categories, difficulty adapts as you go. | Flutter · Dart |
-| **[Top 10](https://github.com/Lord-shaban/top10-game)** | Real-time football trivia. You and your friends race to name the top ten before anyone else does. | JavaScript · Realtime |
-| **[NeuroBalance](https://github.com/Lord-shaban/neurobalance)** | Cognitive training experiment — testing whether short daily drills hold attention better than long sessions. | Flutter · Dart |
+<table>
+  <tr>
+    <td width="50%"><a href="https://github.com/Lord-shaban/Nota"><img src="assets/cards/nota.svg" alt="Nota — notes and diary app that files your entries for you, built with Flutter and Firebase" width="100%" /></a></td>
+    <td width="50%"><a href="https://github.com/Lord-shaban/lord-ai"><img src="assets/cards/lord-ai.svg" alt="LORD AI — assistant running Llama 3.3 70B on Groq's LPU, with zero dependencies" width="100%" /></a></td>
+  </tr>
+  <tr>
+    <td width="50%"><a href="https://github.com/Lord-shaban/Classic-Barber-App"><img src="assets/cards/classic-barber-app.svg" alt="Classic Barber — booking app with a live queue and WhatsApp confirmations" width="100%" /></a></td>
+    <td width="50%"><a href="https://github.com/Lord-shaban/lordlitor"><img src="assets/cards/lordlitor.svg" alt="Lordlitor — mental-arithmetic trainer with 21 calculation patterns and adaptive difficulty" width="100%" /></a></td>
+  </tr>
+  <tr>
+    <td width="50%"><a href="https://github.com/Lord-shaban/top10-game"><img src="assets/cards/top10-game.svg" alt="Top 10 — real-time multiplayer football trivia" width="100%" /></a></td>
+    <td width="50%"><a href="https://github.com/Lord-shaban/neurobalance"><img src="assets/cards/neurobalance.svg" alt="NeuroBalance — cognitive training experiment in short daily drills" width="100%" /></a></td>
+  </tr>
+</table>
 
-<p align="right"><a href="https://github.com/Lord-shaban?tab=repositories"><b>All 42 repositories →</b></a></p>
+<p align="right"><a href="https://github.com/Lord-shaban?tab=repositories"><b>Every repository →</b></a></p>
 
 ---
 
@@ -40,12 +47,35 @@ Right now I'm going deeper on Laravel and Firebase Cloud, and building more of m
 
 ## Activity
 
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=Lord-shaban&show_icons=true&count_private=true&include_all_commits=true&hide_border=true&rank_icon=github&bg_color=0B0F14&title_color=C9A227&icon_color=3FA79F&text_color=F2E9D8&border_radius=2" height="160" alt="GitHub stats" />
-  <img src="https://streak-stats.demolab.com?user=Lord-shaban&hide_border=true&background=0B0F14&stroke=C9A227&ring=C9A227&fire=C4614F&currStreakLabel=C9A227&sideLabels=F2E9D8&dates=F2E9D8&currStreakNum=F2E9D8&sideNums=F2E9D8&border_radius=2" height="160" alt="Contribution streak" />
-</p>
+<img src="assets/stats.svg" alt="GitHub statistics, regenerated daily from the GitHub API" width="100%" />
 
-<img src="https://github.com/Lord-shaban/Lord-shaban/raw/output/github-contribution-grid-snake-dark.svg" alt="Contribution snake" width="100%" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/Lord-shaban/profile-readme/raw/output/github-contribution-grid-snake-dark.svg" />
+  <img src="https://github.com/Lord-shaban/profile-readme/raw/output/github-contribution-grid-snake.svg" alt="A snake eating this year's contribution graph" width="100%" />
+</picture>
+
+---
+
+## How this page is built
+
+Every image above is generated by this repository — there is no third-party badge or stats service anywhere on the page.
+
+| | |
+| :-- | :-- |
+| [`scripts/lib/theme.mjs`](scripts/lib/theme.mjs) | One palette, one type scale, one geometric motif. Every asset draws from it and nothing else. |
+| [`scripts/build-terminal.mjs`](scripts/build-terminal.mjs) | The shell session up top. Typing is `clip-path` animated with a `steps(n)` function where *n* is the character count, so the reveal lands on glyph boundaries. Timings are computed, not hand-tuned. |
+| [`scripts/build-cards.mjs`](scripts/build-cards.mjs) | Project cards. Prose from [`data/projects.json`](data/projects.json), stars and language from the GitHub API at build time. |
+| [`scripts/build-stats.mjs`](scripts/build-stats.mjs) | The numbers panel, including a language split weighted by bytes actually written rather than repository count. |
+| [`scripts/check-assets.mjs`](scripts/check-assets.mjs) | CI gate: every SVG well-formed and labelled, every README reference resolving, every repo link alive. A broken SVG renders as a silent broken image on GitHub, so this fails the build instead. |
+
+Everything is zero-dependency ESM — no `node_modules`, nothing to audit. [A scheduled workflow](.github/workflows/refresh.yml) re-runs the build daily and commits only when the output actually changes.
+
+```console
+$ npm run build && npm run check
+✓ 15 SVGs well-formed · 15 README references resolve · 7 repo links checked
+```
+
+Motion is opt-in throughout: every animated asset collapses to its final frame under `prefers-reduced-motion: reduce`.
 
 ---
 
@@ -54,11 +84,12 @@ Right now I'm going deeper on Laravel and Firebase Cloud, and building more of m
 Open to collaborating on AI-powered apps, Flutter work, and anything that makes good software feel native in Arabic.
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/ahmed-sha-ban-006a24309/"><img src="https://img.shields.io/badge/Message%20me%20on%20LinkedIn-C9A227?style=for-the-badge&logo=linkedin&logoColor=0B0F14&labelColor=C9A227" alt="Message me on LinkedIn" /></a>
+  <a href="https://www.linkedin.com/in/ahmed-sha-ban-006a24309/"><img src="assets/badges/linkedin.svg" alt="Message me on LinkedIn" height="38" /></a>
+  <a href="mailto:a.shaban2366@nu.edu.eg"><img src="assets/badges/email.svg" alt="Email me" height="38" /></a>
 </p>
 
 <p align="center">
-  <sub><i>“To create tech that inspires and empowers humanity.”</i></sub>
+  <sub><i>"To create tech that inspires and empowers humanity."</i></sub>
 </p>
 
 <p align="center">🍉 <b>Free Palestine</b></p>
