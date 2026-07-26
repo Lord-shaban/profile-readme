@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 340" width="1200" height="340" role="img" aria-label="Ahmed Sha'ban — Software Engineer, Flutter and Laravel, AI">
+  <title>Ahmed Sha'ban — Software Engineer</title>
+
+  <defs>
+    <!-- 8-point star (khatim) tessellation -->
+    <pattern id="tess" width="80" height="80" patternUnits="userSpaceOnUse">
+      <g fill="none" stroke="#C9A227" stroke-width="1">
+        <rect x="21" y="21" width="38" height="38"/>
+        <rect x="21" y="21" width="38" height="38" transform="rotate(45 40 40)"/>
+        <rect x="-19" y="-19" width="38" height="38"/>
+        <rect x="-19" y="-19" width="38" height="38" transform="rotate(45 0 0)"/>
+        <rect x="61" y="-19" width="38" height="38"/>
+        <rect x="61" y="-19" width="38" height="38" transform="rotate(45 80 0)"/>
+        <rect x="-19" y="61" width="38" height="38"/>
+        <rect x="-19" y="61" width="38" height="38" transform="rotate(45 0 80)"/>
+        <rect x="61" y="61" width="38" height="38"/>
+        <rect x="61" y="61" width="38" height="38" transform="rotate(45 80 80)"/>
+      </g>
+    </pattern>
+
+    <!-- centre vignette so the name sits on clean ink -->
+    <radialGradient id="vig" cx="50%" cy="50%" r="52%">
+      <stop offset="0%"   stop-color="#0B0F14" stop-opacity="1"/>
+      <stop offset="55%"  stop-color="#0B0F14" stop-opacity="0.92"/>
+      <stop offset="100%" stop-color="#0B0F14" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- gilding catching the light -->
+    <linearGradient id="gild" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0.00" stop-color="#F2E9D8"/>
+      <stop offset="0.38" stop-color="#F2E9D8"/>
+      <stop offset="0.47" stop-color="#E8C860"/>
+      <stop offset="0.50" stop-color="#FFF3C4"/>
+      <stop offset="0.53" stop-color="#E8C860"/>
+      <stop offset="0.62" stop-color="#F2E9D8"/>
+      <stop offset="1.00" stop-color="#F2E9D8"/>
+      <animateTransform attributeName="gradientTransform" type="translate"
+                        values="-1.2 0; 1.2 0" dur="5s" begin="1.6s" repeatCount="indefinite"/>
+    </linearGradient>
+
+    <style>
+      .serif { font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif; }
+      .ar    { font-family: "Noto Naskh Arabic", "Amiri", "Traditional Arabic", "Segoe UI", Tahoma, serif; }
+      .mono  { font-family: ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, Consolas, monospace; }
+
+      .draw  { stroke-dasharray: 620; stroke-dashoffset: 620; animation: draw 2.6s cubic-bezier(.2,.7,.3,1) forwards; }
+      .draw2 { animation-delay: .3s; }
+      .rule  { stroke-dasharray: 480; stroke-dashoffset: 480; animation: draw 1.4s ease-out .5s forwards; }
+
+      .field { opacity: 0; animation: fade 1.6s ease-out .2s forwards; }
+      .up    { opacity: 0; transform: translateY(12px); animation: up .9s cubic-bezier(.2,.7,.3,1) forwards; }
+      .d1 { animation-delay: .85s } .d2 { animation-delay: 1.15s } .d3 { animation-delay: 1.45s }
+
+      @keyframes draw { to { stroke-dashoffset: 0 } }
+      @keyframes fade { to { opacity: .7 } }
+      @keyframes up   { to { opacity: 1; transform: translateY(0) } }
+
+      @media (prefers-reduced-motion: reduce) {
+        .draw, .draw2, .rule, .field, .up {
+          animation: none !important; opacity: 1 !important;
+          transform: none !important; stroke-dashoffset: 0 !important;
+        }
+        .field { opacity: .7 !important }
+      }
+    </style>
+  </defs>
+
+  <!-- ground -->
+  <rect width="1200" height="340" fill="#0B0F14"/>
+
+  <!-- tessellated field -->
+  <g class="field" opacity="0.7">
+    <rect width="1200" height="340" fill="url(#tess)" opacity="0.40"/>
+  </g>
+  <rect width="1200" height="340" fill="url(#vig)"/>
+
+  <!-- hero khatim: side 148 keeps the rotated corners inside the rules (±104.6 of y=170) -->
+  <g fill="none" stroke="#C9A227" stroke-opacity="0.24" stroke-width="1.4">
+    <rect class="draw"       x="526" y="96" width="148" height="148"/>
+    <rect class="draw draw2" x="526" y="96" width="148" height="148" transform="rotate(45 600 170)"/>
+  </g>
+
+  <!-- rules -->
+  <g stroke="#C9A227" stroke-opacity="0.55" stroke-width="1">
+    <line class="rule" x1="600" y1="62"  x2="140"  y2="62"/>
+    <line class="rule" x1="600" y1="62"  x2="1060" y2="62"/>
+    <line class="rule" x1="600" y1="288" x2="140"  y2="288"/>
+    <line class="rule" x1="600" y1="288" x2="1060" y2="288"/>
+  </g>
+  <g fill="#C9A227" fill-opacity="0.8" class="up d1">
+    <circle cx="600" cy="62" r="2.5"/>
+    <circle cx="600" cy="288" r="2.5"/>
+  </g>
+
+  <!-- name -->
+  <text class="serif up d1" x="600" y="158" text-anchor="middle"
+        font-size="62" letter-spacing="12" fill="url(#gild)">AHMED SHA&#8217;BAN</text>
+
+  <!-- arabic -->
+  <text class="ar up d2" x="600" y="208" text-anchor="middle"
+        font-size="30" fill="#C9A227" fill-opacity="0.92">أحمد شعبان</text>
+
+  <!-- role -->
+  <text class="mono up d3" x="600" y="250" text-anchor="middle"
+        font-size="13" letter-spacing="6" fill="#4FA8A1">SOFTWARE ENGINEER &#183; FLUTTER &#183; LARAVEL &#183; AI</text>
+
+  <!-- corner marks -->
+  <g stroke="#C9A227" stroke-opacity="0.45" stroke-width="1" fill="none" class="up d3">
+    <path d="M28 28 h26 M28 28 v26"/>
+    <path d="M1172 28 h-26 M1172 28 v26"/>
+    <path d="M28 312 h26 M28 312 v-26"/>
+    <path d="M1172 312 h-26 M1172 312 v-26"/>
+  </g>
+</svg>
