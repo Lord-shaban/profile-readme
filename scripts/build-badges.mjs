@@ -2,46 +2,61 @@
  * Renders assets/badges/*.svg — the contact row.
  *
  * These replace shields.io: a generic badge service cannot be told about this
- * palette, and every request is a third party the profile has to stay up.
- * The marks are typographic rather than brand logos, which keeps the row in
- * the same voice as the rest of the page.
+ * palette, and every request is one more third party the page has to stay up.
  */
 
 import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { esc, ink, pigment, svg } from './lib/theme.mjs';
+import { bg, esc, monoWidth, svg, syntax } from './lib/theme.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
-const H = 38;
-const PAD = 15;
-const GAP = 10;
-const MARK = 20;
+const H = 40;
+const PAD = 14;
+const ICON = 18;
+const GAP = 9;
+const FONT = 12.5;
+
+/** Icons are drawn, not typed, so they never depend on the reader's fonts. */
+const icons = {
+  linkedin: (c) =>
+    `<rect x="0" y="0" width="${ICON}" height="${ICON}" rx="4" fill="${c}" fill-opacity="0.18"/>
+     <text class="sans" x="${ICON / 2}" y="${ICON / 2 + 4.5}" text-anchor="middle" font-size="11" font-weight="700" fill="${c}">in</text>`,
+  x: (c) =>
+    `<path d="M3 3 L15 15 M15 3 L3 15" stroke="${c}" stroke-width="2" stroke-linecap="round"/>`,
+  facebook: (c) =>
+    `<rect x="0" y="0" width="${ICON}" height="${ICON}" rx="4" fill="${c}" fill-opacity="0.18"/>
+     <text class="sans" x="${ICON / 2}" y="${ICON / 2 + 5}" text-anchor="middle" font-size="12" font-weight="700" fill="${c}">f</text>`,
+  email: (c) =>
+    `<rect x="1" y="3.5" width="16" height="11.5" rx="2.5" fill="none" stroke="${c}" stroke-width="1.6"/>
+     <path d="M1.8 5 L9 10.5 L16.2 5" fill="none" stroke="${c}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>`,
+  location: (c) =>
+    `<path d="M9 16.5 C9 16.5 15 10.8 15 7.2 A6 6 0 0 0 3 7.2 C3 10.8 9 16.5 9 16.5 Z" fill="none" stroke="${c}" stroke-width="1.6"/>
+     <circle cx="9" cy="7.2" r="2.1" fill="${c}"/>`,
+};
 
 const badges = [
-  { file: 'linkedin', mark: 'in', label: 'LinkedIn', accent: pigment.gold },
-  { file: 'x', mark: '✕', label: 'X / Twitter', accent: pigment.cream },
-  { file: 'facebook', mark: 'f', label: 'Facebook', accent: pigment.gold },
-  { file: 'email', mark: '@', label: 'Email', accent: pigment.verdigris },
-  { file: 'location', mark: '◈', label: '6th of October, Egypt', accent: pigment.ochre, plain: true },
+  { file: 'linkedin', icon: 'linkedin', label: 'LinkedIn', color: syntax.blue },
+  { file: 'x', icon: 'x', label: 'X / Twitter', color: syntax.text },
+  { file: 'facebook', icon: 'facebook', label: 'Facebook', color: syntax.purple },
+  { file: 'email', icon: 'email', label: 'Email', color: syntax.green },
+  { file: 'location', icon: 'location', label: '6th of October, Egypt', color: syntax.orange, muted: true },
 ];
 
-function badge({ mark, label, accent, plain }) {
-  const labelWidth = label.length * 7.1;
-  const W = Math.round(PAD + MARK + GAP + labelWidth + PAD);
-  const markX = PAD + MARK / 2;
-  const labelX = PAD + MARK + GAP;
+function badge({ icon, label, color, muted }) {
+  const labelWidth = monoWidth(label, FONT);
+  const W = Math.round(PAD + ICON + GAP + labelWidth + PAD);
 
   const body = `
-  <rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="2" fill="${ink.panel}" stroke="${accent}" stroke-opacity="0.38"/>
-  <rect x="0" y="0" width="2.5" height="${H}" fill="${accent}" fill-opacity="0.85"/>
-  <text class="serif" x="${markX}" y="${H / 2 + 6}" text-anchor="middle" font-size="17" fill="${accent}" fill-opacity="0.95">${esc(mark)}</text>
-  <line x1="${PAD + MARK + GAP / 2 - 1}" y1="9" x2="${PAD + MARK + GAP / 2 - 1}" y2="${H - 9}" stroke="${accent}" stroke-opacity="0.22"/>
-  <text class="mono" x="${labelX}" y="${H / 2 + 4}" font-size="11.5" letter-spacing="0.4" fill="${pigment.cream}" fill-opacity="${plain ? 0.6 : 0.88}">${esc(label)}</text>`;
+  <rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="9" fill="${bg.panel}" stroke="${bg.line}"/>
+  <g transform="translate(${PAD} ${(H - ICON) / 2})">
+    ${icons[icon](color)}
+  </g>
+  <text class="mono" x="${PAD + ICON + GAP}" y="${H / 2 + 4.5}" font-size="${FONT}" fill="${muted ? syntax.muted : syntax.text}">${esc(label)}</text>`;
 
-  return svg({ width: W, height: H, title: label, body });
+  return svg({ width: W, height: H, title: label, body, background: bg.panel });
 }
 
 await mkdir(resolve(root, 'assets/badges'), { recursive: true });

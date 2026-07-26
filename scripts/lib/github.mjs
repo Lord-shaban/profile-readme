@@ -5,65 +5,77 @@
  * automatic token; locally, `gh auth token` will produce one.
  */
 
-const TOKEN = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
+export const TOKEN = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
 
-if (!TOKEN) {
+/**
+ * Callers that need authentication ask for it explicitly. Exiting at import
+ * time instead would take down the checks that are perfectly able to run
+ * without a token.
+ */
+export function requireToken() {
+  if (TOKEN) return TOKEN;
   console.error('GITHUB_TOKEN is not set. Locally: $env:GITHUB_TOKEN = (gh auth token)');
   process.exit(1);
 }
 
 const headers = {
-  Authorization: `Bearer ${TOKEN}`,
+  ...(TOKEN ? { Authorization: `Bearer ${TOKEN}` } : {}),
   Accept: 'application/vnd.github+json',
   'User-Agent': 'profile-readme-builder',
 };
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+/** A transport-level failure — worth retrying, unlike a 4xx. */
+const isTransportError = (error) =>
+  error.retryable || error.name === 'TimeoutError' || error.name === 'AbortError' || Boolean(error.cause);
+
 /**
- * POST a GraphQL query and return `data`, throwing on any GraphQL error.
+ * `fetch` with exponential backoff on transport failures and 5xx/429.
  *
- * Retries on transport failures and on 5xx/429, with exponential backoff.
- * A scheduled build is unattended, and api.github.com refusing one connection
- * is not a reason to leave the profile with half its assets regenerated.
+ * Scheduled builds are unattended, and api.github.com refusing a single
+ * connection is not a reason to fail the run or leave assets half-written.
  */
-export async function graphql(query, variables = {}, { attempts = 4 } = {}) {
+export async function request(url, { attempts = 4, timeout = 20_000, ...init } = {}) {
   let lastError;
 
   for (let attempt = 1; attempt <= attempts; attempt += 1) {
     try {
-      const res = await fetch('https://api.github.com/graphql', {
-        method: 'POST',
-        headers: { ...headers, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query, variables }),
-        signal: AbortSignal.timeout(20_000),
-      });
-
-      // 4xx other than rate limiting is a bug in the query or the token;
-      // retrying will not fix it, so surface it immediately.
-      if (!res.ok && res.status < 500 && res.status !== 429) {
-        throw new Error(`GraphQL HTTP ${res.status}: ${await res.text()}`);
+      const res = await fetch(url, { ...init, headers: { ...headers, ...init.headers }, signal: AbortSignal.timeout(timeout) });
+      if (res.status >= 500 || res.status === 429) {
+        throw Object.assign(new Error(`HTTP ${res.status}`), { retryable: true });
       }
-      if (!res.ok) throw Object.assign(new Error(`GraphQL HTTP ${res.status}`), { retryable: true });
-
-      const payload = await res.json();
-      if (payload.errors?.length) {
-        throw new Error(`GraphQL: ${payload.errors.map((e) => e.message).join('; ')}`);
-      }
-      return payload.data;
+      return res;
     } catch (error) {
       lastError = error;
-
-      const retryable = error.retryable || error.name === 'TimeoutError' || error.name === 'AbortError' || error.cause;
-      if (!retryable || attempt === attempts) break;
+      if (!isTransportError(error) || attempt === attempts) break;
 
       const backoff = 2 ** (attempt - 1) * 1000;
-      console.warn(`  api.github.com: ${error.message} — retrying in ${backoff / 1000}s (${attempt}/${attempts - 1})`);
+      console.warn(`  ${new URL(url).host}: ${error.message} — retrying in ${backoff / 1000}s (${attempt}/${attempts - 1})`);
       await sleep(backoff);
     }
   }
 
   throw lastError;
+}
+
+/** POST a GraphQL query and return `data`, throwing on any GraphQL error. */
+export async function graphql(query, variables = {}) {
+  requireToken();
+
+  const res = await request('https://api.github.com/graphql', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ query, variables }),
+  });
+
+  if (!res.ok) throw new Error(`GraphQL HTTP ${res.status}: ${await res.text()}`);
+
+  const payload = await res.json();
+  if (payload.errors?.length) {
+    throw new Error(`GraphQL: ${payload.errors.map((e) => e.message).join('; ')}`);
+  }
+  return payload.data;
 }
 
 /**

@@ -1,24 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 38" width="96" height="38" role="img" aria-label="Email">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 93 40" width="93" height="40" role="img" aria-label="Email">
   <title>Email</title>
   <defs>
     
     <style>
-      .serif { font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif; }
-      .mono  { font-family: ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, Consolas, monospace; }
-      .ar    { font-family: "Noto Naskh Arabic", "Amiri", "Traditional Arabic", "Segoe UI", Tahoma, serif; }
+      .mono { font-family: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, Consolas, monospace; }
+      .sans { font-family: ui-sans-serif, system-ui, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
       
       
   @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; }
-    .anim { opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; }
+    .anim, .fx { opacity: 1 !important; transform: none !important; clip-path: none !important; }
   }
     </style>
   </defs>
-  <rect width="96" height="38" fill="#0B0F14"/>
+  <rect width="93" height="40" rx="8" fill="#1F2335"/>
 
-  <rect x="0.5" y="0.5" width="95" height="37" rx="2" fill="#10161E" stroke="#3FA79F" stroke-opacity="0.38"/>
-  <rect x="0" y="0" width="2.5" height="38" fill="#3FA79F" fill-opacity="0.85"/>
-  <text class="serif" x="25" y="25" text-anchor="middle" font-size="17" fill="#3FA79F" fill-opacity="0.95">@</text>
-  <line x1="39" y1="9" x2="39" y2="29" stroke="#3FA79F" stroke-opacity="0.22"/>
-  <text class="mono" x="45" y="23" font-size="11.5" letter-spacing="0.4" fill="#F2E9D8" fill-opacity="0.88">Email</text>
+  <rect x="0.5" y="0.5" width="92" height="39" rx="9" fill="#1F2335" stroke="#292E42"/>
+  <g transform="translate(14 11)">
+    <rect x="1" y="3.5" width="16" height="11.5" rx="2.5" fill="none" stroke="#9ECE6A" stroke-width="1.6"/>
+     <path d="M1.8 5 L9 10.5 L16.2 5" fill="none" stroke="#9ECE6A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text class="mono" x="41" y="24.5" font-size="12.5" fill="#C0CAF5">Email</text>
 </svg>

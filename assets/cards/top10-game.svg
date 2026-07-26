@@ -1,56 +1,42 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 176" width="560" height="176" role="img" aria-label="Top 10 — Real-time football trivia. You and your friends race to name the top ten before anyone else does.">
-  <title>Top 10 — Real-time football trivia. You and your friends race to name the top ten before anyone else does.</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 184" width="560" height="184" role="img" aria-label="Top 10 — Real-time football trivia. You and your friends race to name the top ten before anyone else does. (1 stars)">
+  <title>Top 10 — Real-time football trivia. You and your friends race to name the top ten before anyone else does. (1 stars)</title>
   <defs>
-    <pattern id="ground" width="64" height="64" patternUnits="userSpaceOnUse">
-    <g fill="none" stroke="#C9A227" stroke-width="1">
-      <rect x="16.8" y="16.8" width="30.4" height="30.4"/><rect x="16.8" y="16.8" width="30.4" height="30.4" transform="rotate(45 32 32)"/>
-      <rect x="-15.2" y="-15.2" width="30.4" height="30.4"/><rect x="-15.2" y="-15.2" width="30.4" height="30.4" transform="rotate(45 0 0)"/>
-      <rect x="48.8" y="-15.2" width="30.4" height="30.4"/><rect x="48.8" y="-15.2" width="30.4" height="30.4" transform="rotate(45 64 0)"/>
-      <rect x="-15.2" y="48.8" width="30.4" height="30.4"/><rect x="-15.2" y="48.8" width="30.4" height="30.4" transform="rotate(45 0 64)"/>
-      <rect x="48.8" y="48.8" width="30.4" height="30.4"/><rect x="48.8" y="48.8" width="30.4" height="30.4" transform="rotate(45 64 64)"/>
-    </g>
-  </pattern>
+    
     <style>
-      .serif { font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif; }
-      .mono  { font-family: ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, Consolas, monospace; }
-      .ar    { font-family: "Noto Naskh Arabic", "Amiri", "Traditional Arabic", "Segoe UI", Tahoma, serif; }
+      .mono { font-family: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, Consolas, monospace; }
+      .sans { font-family: ui-sans-serif, system-ui, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
       
-      .rise { opacity: 0; transform: translateY(6px); animation: rise .55s cubic-bezier(.2,.7,.3,1) .05s forwards; }
-      @keyframes rise { to { opacity: 1; transform: translateY(0) } }
+      .rise { animation: rise .5s cubic-bezier(.2,.7,.3,1) .05s backwards; }
+      @keyframes rise { from { opacity: 0; transform: translateY(6px) } to { opacity: 1; transform: none } }
       
   @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; }
-    .anim { opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; }
+    .anim, .fx { opacity: 1 !important; transform: none !important; clip-path: none !important; }
   }
     </style>
   </defs>
-  <rect width="560" height="176" fill="#0B0F14"/>
+  <rect width="560" height="184" rx="8" fill="#1A1B26"/>
 
-  <rect x="0.5" y="0.5" width="559" height="175" rx="2" fill="#10161E" stroke="#C9A227" stroke-opacity="0.28"/>
-  <rect x="0.5" y="0.5" width="559" height="175" rx="2" fill="url(#ground)" opacity="0.10"/>
-  <rect x="0" y="0" width="3" height="176" fill="#C9A227" fill-opacity="0.9"/>
+  <rect x="0.5" y="0.5" width="559" height="183" rx="10" fill="#1F2335" stroke="#292E42"/>
+  <path d="M0 10 a10 10 0 0 1 10 -10 h1 v184 h-1 a10 10 0 0 1 -10 -10 z" fill="#E0AF68"/>
 
-  <g class="anim rise">
-    <text class="serif" x="26" y="46" font-size="23" letter-spacing="0.4" fill="#C9A227">Top 10</text>
+  <g class="fx rise">
+    <circle cx="33" cy="41" r="5.5" fill="#E0AF68"/>
+    <text class="sans" x="48" y="47" font-size="19" font-weight="600" fill="#C0CAF5">Top 10</text>
 
-    <g fill="#C9A227" fill-opacity="0.75" transform="translate(500 40)"><polygon points="0.00,-7.00 1.73,-2.38 6.66,-2.16 2.80,0.91 4.11,5.66 0.00,2.94 -4.11,5.66 -2.80,0.91 -6.66,-2.16 -1.73,-2.38"/></g>
-    <text class="mono" x="534" y="45" text-anchor="end" font-size="12" fill="#F2E9D8" fill-opacity="0.7">1</text>
+    <g fill="#E0AF68" fill-opacity="0.9" transform="translate(506 41)"><polygon points="0.00,-7.00 1.73,-2.38 6.66,-2.16 2.80,0.91 4.11,5.66 0.00,2.94 -4.11,5.66 -2.80,0.91 -6.66,-2.16 -1.73,-2.38"/></g>
+    <text class="mono" x="532" y="46" text-anchor="end" font-size="12.5" fill="#565F89">1</text>
 
-    <text class="mono" x="26" y="76" font-size="11.5" fill="#F2E9D8" fill-opacity="0.68">Real-time football trivia. You and your friends race to name the top</text>
-    <text class="mono" x="26" y="95" font-size="11.5" fill="#F2E9D8" fill-opacity="0.68">ten before anyone else does.</text>
+    <text class="sans" x="28" y="80" font-size="13.5" fill="#565F89">Real-time football trivia. You and your friends race to</text>
+    <text class="sans" x="28" y="101" font-size="13.5" fill="#565F89">name the top ten before anyone else does.</text>
 
     <g>
-    <rect x="26" y="132" width="82.0" height="20" rx="2" fill="#C9A227" fill-opacity="0.10" stroke="#C9A227" stroke-opacity="0.34"/>
-    <text class="mono" x="67.0" y="146" text-anchor="middle" font-size="10" fill="#C9A227" fill-opacity="0.95">JavaScript</text>
-  </g>
+      <rect x="28" y="138" width="86.0" height="22" rx="5" fill="#E0AF68" fill-opacity="0.12"/>
+      <text class="mono" x="71.0" y="153" text-anchor="middle" font-size="11" fill="#E0AF68" fill-opacity="0.95">JavaScript</text>
+    </g>
     <g>
-    <rect x="116" y="132" width="69.2" height="20" rx="2" fill="#C9A227" fill-opacity="0.10" stroke="#C9A227" stroke-opacity="0.34"/>
-    <text class="mono" x="150.6" y="146" text-anchor="middle" font-size="10" fill="#C9A227" fill-opacity="0.95">Realtime</text>
-  </g>
-  </g>
-
-  <g stroke="#C9A227" stroke-opacity="0.30" stroke-width="1" fill="none">
-    <path d="M546 10 h-10 M546 10 v10"/>
-    <path d="M546 166 h-10 M546 166 v-10"/>
+      <rect x="122" y="138" width="72.8" height="22" rx="5" fill="#E0AF68" fill-opacity="0.12"/>
+      <text class="mono" x="158.4" y="153" text-anchor="middle" font-size="11" fill="#E0AF68" fill-opacity="0.95">Realtime</text>
+    </g>
   </g>
 </svg>

@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 429" width="1200" height="429" role="img" aria-label="Ahmed Sha&apos;ban — Software Engineer studying at Nile University and leading Abakera NU. Builds Flutter apps, Laravel APIs and realtime systems; exploring LLMs in production and Firebase Cloud. Ships finished products, not practice projects.">
+  <title>Ahmed Sha&apos;ban — Software Engineer studying at Nile University and leading Abakera NU. Builds Flutter apps, Laravel APIs and realtime systems; exploring LLMs in production and Firebase Cloud. Ships finished products, not practice projects.</title>
+  <defs>
+    
+    <style>
+      .mono { font-family: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, Consolas, monospace; }
+      .sans { font-family: ui-sans-serif, system-ui, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+      
+      /* The hidden state lives in the keyframe, not on the element: with
+         'backwards' fill the line is clipped only while its animation is
+         pending, so if animations never run the code is simply all there. */
+      .caret { opacity: 0; }
+      @keyframes reveal { from { clip-path: inset(0 100% 0 0) } to { clip-path: inset(0 0 0 0) } }
+      @keyframes caret  { 0%, 99% { opacity: 1 } 100% { opacity: 0 } }
+      @keyframes appear { from { opacity: 0 } to { opacity: 1 } }
+      .l1 { animation: reveal 0.50s steps(25) 0.45s backwards; }
+      .c1 { opacity: 0; animation: caret 0.50s steps(1, end) 0.45s forwards, walk1 0.50s steps(25) 0.45s both; }
+      @keyframes walk1 { to { transform: translateX(232.5px) } }
+      .l2 { animation: reveal 0.58s steps(29) 0.59s backwards; }
+      .c2 { opacity: 0; animation: caret 0.58s steps(1, end) 0.59s forwards, walk2 0.58s steps(29) 0.59s both; }
+      @keyframes walk2 { to { transform: translateX(269.7px) } }
+      .l3 { animation: reveal 0.66s steps(33) 0.73s backwards; }
+      .c3 { opacity: 0; animation: caret 0.66s steps(1, end) 0.73s forwards, walk3 0.66s steps(33) 0.73s both; }
+      @keyframes walk3 { to { transform: translateX(306.9px) } }
+      .l4 { animation: reveal 0.62s steps(31) 0.87s backwards; }
+      .c4 { opacity: 0; animation: caret 0.62s steps(1, end) 0.87s forwards, walk4 0.62s steps(31) 0.87s both; }
+      @keyframes walk4 { to { transform: translateX(288.3px) } }
+      .l5 { animation: reveal 0.52s steps(26) 1.01s backwards; }
+      .c5 { opacity: 0; animation: caret 0.52s steps(1, end) 1.01s forwards, walk5 0.52s steps(26) 1.01s both; }
+      @keyframes walk5 { to { transform: translateX(241.8px) } }
+      .l7 { animation: reveal 0.70s steps(66) 1.29s backwards; }
+      .c7 { opacity: 0; animation: caret 0.70s steps(1, end) 1.29s forwards, walk7 0.70s steps(66) 1.29s both; }
+      @keyframes walk7 { to { transform: translateX(613.8px) } }
+      .l8 { animation: reveal 0.70s steps(54) 1.43s backwards; }
+      .c8 { opacity: 0; animation: caret 0.70s steps(1, end) 1.43s forwards, walk8 0.70s steps(54) 1.43s both; }
+      @keyframes walk8 { to { transform: translateX(502.2px) } }
+      .l10 { animation: reveal 0.70s steps(63) 1.71s backwards; }
+      .c10 { opacity: 0; animation: caret 0.70s steps(1, end) 1.71s forwards, walk10 0.70s steps(63) 1.71s both; }
+      @keyframes walk10 { to { transform: translateX(585.9px) } }
+      .l11 { animation: reveal 0.02s steps(1) 1.85s backwards; }
+      .c11 { opacity: 0; animation: caret 0.02s steps(1, end) 1.85s forwards, walk11 0.02s steps(1) 1.85s both; }
+      @keyframes walk11 { to { transform: translateX(9.3px) } }
+      /* 'backwards', not a base opacity of 0: if the animation never runs the
+         status bar stays visible instead of disappearing permanently. */
+      .status { animation: appear .4s ease-out 2.29s backwards; }
+      
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; }
+    .anim, .fx { opacity: 1 !important; transform: none !important; clip-path: none !important; }
+  }
+    </style>
+  </defs>
+  <rect width="1200" height="429" rx="8" fill="#1A1B26"/>
+
+  <!-- tab strip -->
+  <path d="M0 8 a8 8 0 0 1 8 -8 h1184 a8 8 0 0 1 8 8 v38 h-1200 z" fill="#16161E"/>
+  <circle cx="26" cy="23" r="5.5" fill="#F7768E" fill-opacity="0.9"/><circle cx="42.5" cy="23" r="5.5" fill="#E0AF68" fill-opacity="0.9"/><circle cx="59" cy="23" r="5.5" fill="#9ECE6A" fill-opacity="0.9"/>
+  <g>
+    <rect x="96" y="0" width="108.4" height="46" fill="#1A1B26"/>
+    <rect x="96" y="0" width="108.4" height="2" fill="#7AA2F7"/>
+    <circle cx="114" cy="23" r="4" fill="#7AA2F7" fill-opacity="1"/>
+    <text class="mono" x="126" y="27.5" font-size="13" fill="#C0CAF5">ahmed.ts</text>
+  </g>
+  <g>
+    <rect x="204.4" y="0" width="116.2" height="46" fill="none"/>
+    
+    <circle cx="222.4" cy="23" r="4" fill="#565F89" fill-opacity="0.5"/>
+    <text class="mono" x="234.4" y="27.5" font-size="13" fill="#565F89">README.md</text>
+  </g>
+  <line x1="0" y1="46" x2="1200" y2="46" stroke="#292E42"/>
+
+  <!-- gutter -->
+  <rect x="0" y="46" width="78" height="349" fill="#16161E" fill-opacity="0.45"/>
+  <g>
+    <text class="mono" x="66" y="91" text-anchor="end" font-size="13.5" fill="#565F89" fill-opacity="0.65">1</text>
+    <text class="mono" x="66" y="118" text-anchor="end" font-size="13.5" fill="#565F89" fill-opacity="0.65">2</text>
+    <text class="mono" x="66" y="145" text-anchor="end" font-size="13.5" fill="#565F89" fill-opacity="0.65">3</text>
+    <text class="mono" x="66" y="172" text-anchor="end" font-size="13.5" fill="#565F89" fill-opacity="0.65">4</text>
+    <text class="mono" x="66" y="199" text-anchor="end" font-size="13.5" fill="#565F89" fill-opacity="0.65">5</text>
+    <text class="mono" x="66" y="226" text-anchor="end" font-size="13.5" fill="#565F89" fill-opacity="0.65">6</text>
+    <text class="mono" x="66" y="253" text-anchor="end" font-size="13.5" fill="#565F89" fill-opacity="0.65">7</text>
+    <text class="mono" x="66" y="280" text-anchor="end" font-size="13.5" fill="#565F89" fill-opacity="0.65">8</text>
+    <text class="mono" x="66" y="307" text-anchor="end" font-size="13.5" fill="#565F89" fill-opacity="0.65">9</text>
+    <text class="mono" x="66" y="334" text-anchor="end" font-size="13.5" fill="#565F89" fill-opacity="0.65">10</text>
+    <text class="mono" x="66" y="361" text-anchor="end" font-size="13.5" fill="#565F89" fill-opacity="0.65">11</text>
+  </g>
+
+  <!-- code -->
+  <g>
+    <text class="mono type l1" xml:space="preserve" x="92" y="91" font-size="15.5" fill="#C0CAF5"><tspan fill="#BB9AF7">const</tspan> <tspan fill="#7DCFFF">ahmed</tspan><tspan fill="#565F89">:</tspan> <tspan fill="#C0CAF5">Engineer</tspan> <tspan fill="#565F89">=</tspan> <tspan fill="#565F89">{</tspan></text>
+    <text class="mono type l2" xml:space="preserve" x="92" y="118" font-size="15.5" fill="#C0CAF5">  <tspan fill="#7DCFFF">name</tspan><tspan fill="#565F89">:</tspan>      <tspan fill="#9ECE6A">&quot;Ahmed Sha&apos;ban&quot;</tspan><tspan fill="#565F89">,</tspan></text>
+    <text class="mono type l3" xml:space="preserve" x="92" y="145" font-size="15.5" fill="#C0CAF5">  <tspan fill="#7DCFFF">role</tspan><tspan fill="#565F89">:</tspan>      <tspan fill="#9ECE6A">&quot;Software Engineer&quot;</tspan><tspan fill="#565F89">,</tspan></text>
+    <text class="mono type l4" xml:space="preserve" x="92" y="172" font-size="15.5" fill="#C0CAF5">  <tspan fill="#7DCFFF">studying</tspan><tspan fill="#565F89">:</tspan>  <tspan fill="#9ECE6A">&quot;Nile University&quot;</tspan><tspan fill="#565F89">,</tspan></text>
+    <text class="mono type l5" xml:space="preserve" x="92" y="199" font-size="15.5" fill="#C0CAF5">  <tspan fill="#7DCFFF">leads</tspan><tspan fill="#565F89">:</tspan>     <tspan fill="#9ECE6A">&quot;Abakera NU&quot;</tspan><tspan fill="#565F89">,</tspan></text>
+    <text class="mono type l7" xml:space="preserve" x="92" y="253" font-size="15.5" fill="#C0CAF5">  <tspan fill="#7DCFFF">builds</tspan><tspan fill="#565F89">:</tspan>    <tspan fill="#565F89">[</tspan><tspan fill="#9ECE6A">&quot;Flutter apps&quot;</tspan><tspan fill="#565F89">,</tspan> <tspan fill="#9ECE6A">&quot;Laravel APIs&quot;</tspan><tspan fill="#565F89">,</tspan> <tspan fill="#9ECE6A">&quot;realtime systems&quot;</tspan><tspan fill="#565F89">],</tspan></text>
+    <text class="mono type l8" xml:space="preserve" x="92" y="280" font-size="15.5" fill="#C0CAF5">  <tspan fill="#7DCFFF">exploring</tspan><tspan fill="#565F89">:</tspan> <tspan fill="#565F89">[</tspan><tspan fill="#9ECE6A">&quot;LLMs in production&quot;</tspan><tspan fill="#565F89">,</tspan> <tspan fill="#9ECE6A">&quot;Firebase Cloud&quot;</tspan><tspan fill="#565F89">],</tspan></text>
+    <text class="mono type l10" xml:space="preserve" x="92" y="334" font-size="15.5" fill="#C0CAF5">  <tspan fill="#7DCFFF">ships</tspan><tspan fill="#565F89">:</tspan>     <tspan fill="#FF9E64">true</tspan><tspan fill="#565F89">,</tspan>  <tspan fill="#565F89">// finished products, not practice projects</tspan></text>
+    <text class="mono type l11" xml:space="preserve" x="92" y="361" font-size="15.5" fill="#C0CAF5"><tspan fill="#565F89">}</tspan></text>
+  </g>
+  <g>
+    <rect class="caret c1" x="92" y="78.5" width="9.3" height="18.5" fill="#7AA2F7" fill-opacity="0.85"/>
+    <rect class="caret c2" x="92" y="105.5" width="9.3" height="18.5" fill="#7AA2F7" fill-opacity="0.85"/>
+    <rect class="caret c3" x="92" y="132.5" width="9.3" height="18.5" fill="#7AA2F7" fill-opacity="0.85"/>
+    <rect class="caret c4" x="92" y="159.5" width="9.3" height="18.5" fill="#7AA2F7" fill-opacity="0.85"/>
+    <rect class="caret c5" x="92" y="186.5" width="9.3" height="18.5" fill="#7AA2F7" fill-opacity="0.85"/>
+    <rect class="caret c7" x="92" y="240.5" width="9.3" height="18.5" fill="#7AA2F7" fill-opacity="0.85"/>
+    <rect class="caret c8" x="92" y="267.5" width="9.3" height="18.5" fill="#7AA2F7" fill-opacity="0.85"/>
+    <rect class="caret c10" x="92" y="321.5" width="9.3" height="18.5" fill="#7AA2F7" fill-opacity="0.85"/>
+    <rect class="caret c11" x="92" y="348.5" width="9.3" height="18.5" fill="#7AA2F7" fill-opacity="0.85"/>
+  </g>
+
+  <!-- status bar -->
+  <path d="M0 395 h1200 v26 a8 8 0 0 1 -8 8 h-1184 a8 8 0 0 1 -8 -8 z" fill="#16161E"/>
+  <line x1="0" y1="395" x2="1200" y2="395" stroke="#292E42"/>
+  <g class="fx status">
+    <g>
+      <path d="M22 416 v-8 M22 408 a3 3 0 1 1 0.1 0 M22 416 a3 3 0 1 0 0.1 0" stroke="#7AA2F7" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+      <text class="mono" x="34" y="416" font-size="12" fill="#565F89">main</text>
+    </g>
+    <g>
+      <circle cx="91.8" cy="412" r="3.5" fill="#9ECE6A"/>
+      <text class="mono" x="102.8" y="416" font-size="12" fill="#565F89">0 problems</text>
+    </g>
+    <g>
+      <circle cx="203.8" cy="412" r="3.5" fill="#73DACA"/>
+      <text class="mono" x="214.8" y="416" font-size="12" fill="#565F89">build passing</text>
+    </g>
+    <text class="mono" x="1178" y="416" text-anchor="end" font-size="12" fill="#565F89">TypeScript · UTF-8 · Ln 11, Col 2 · Spaces: 2</text>
+  </g>
+</svg>

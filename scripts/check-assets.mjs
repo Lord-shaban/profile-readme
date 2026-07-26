@@ -14,6 +14,8 @@ import { readFile, readdir, stat } from 'node:fs/promises';
 import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { TOKEN, request } from './lib/github.mjs';
+
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
 const problems = [];
@@ -120,15 +122,16 @@ const repoLinks = [...referenced].filter((r) =>
   r.startsWith(`https://github.com/${owner}/`),
 );
 
-const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
-if (token) {
+let checkedLinks = 0;
+
+if (TOKEN) {
   for (const link of repoLinks) {
     const path = link.replace('https://github.com/', '').replace(/\/$/, '');
     if (path.split('/').length !== 2) continue; // profile or query links
-    const res = await fetch(`https://api.github.com/repos/${path}`, {
-      headers: { Authorization: `Bearer ${token}`, 'User-Agent': 'profile-readme-check' },
-    });
+
+    const res = await request(`https://api.github.com/repos/${path}`);
     if (!res.ok) note('README.md', `links to ${link} → HTTP ${res.status}`);
+    checkedLinks += 1;
   }
 } else {
   console.log('· no token: skipping repo-link check');
@@ -142,4 +145,4 @@ if (problems.length) {
   process.exit(1);
 }
 
-console.log(`✓ ${svgs.length} SVGs well-formed · ${localRefs.length} README references resolve · ${repoLinks.length} repo links checked`);
+console.log(`✓ ${svgs.length} SVGs well-formed · ${localRefs.length} README references resolve · ${checkedLinks} repo links checked`);

@@ -1,24 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 209 38" width="209" height="38" role="img" aria-label="6th of October, Egypt">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 213 40" width="213" height="40" role="img" aria-label="6th of October, Egypt">
   <title>6th of October, Egypt</title>
   <defs>
     
     <style>
-      .serif { font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif; }
-      .mono  { font-family: ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, Consolas, monospace; }
-      .ar    { font-family: "Noto Naskh Arabic", "Amiri", "Traditional Arabic", "Segoe UI", Tahoma, serif; }
+      .mono { font-family: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, Consolas, monospace; }
+      .sans { font-family: ui-sans-serif, system-ui, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
       
       
   @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; }
-    .anim { opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; }
+    .anim, .fx { opacity: 1 !important; transform: none !important; clip-path: none !important; }
   }
     </style>
   </defs>
-  <rect width="209" height="38" fill="#0B0F14"/>
+  <rect width="213" height="40" rx="8" fill="#1F2335"/>
 
-  <rect x="0.5" y="0.5" width="208" height="37" rx="2" fill="#10161E" stroke="#C4614F" stroke-opacity="0.38"/>
-  <rect x="0" y="0" width="2.5" height="38" fill="#C4614F" fill-opacity="0.85"/>
-  <text class="serif" x="25" y="25" text-anchor="middle" font-size="17" fill="#C4614F" fill-opacity="0.95">◈</text>
-  <line x1="39" y1="9" x2="39" y2="29" stroke="#C4614F" stroke-opacity="0.22"/>
-  <text class="mono" x="45" y="23" font-size="11.5" letter-spacing="0.4" fill="#F2E9D8" fill-opacity="0.6">6th of October, Egypt</text>
+  <rect x="0.5" y="0.5" width="212" height="39" rx="9" fill="#1F2335" stroke="#292E42"/>
+  <g transform="translate(14 11)">
+    <path d="M9 16.5 C9 16.5 15 10.8 15 7.2 A6 6 0 0 0 3 7.2 C3 10.8 9 16.5 9 16.5 Z" fill="none" stroke="#FF9E64" stroke-width="1.6"/>
+     <circle cx="9" cy="7.2" r="2.1" fill="#FF9E64"/>
+  </g>
+  <text class="mono" x="41" y="24.5" font-size="12.5" fill="#565F89">6th of October, Egypt</text>
 </svg>

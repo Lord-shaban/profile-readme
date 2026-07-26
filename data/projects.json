@@ -17,7 +17,7 @@
     {
       "repo": "Classic-Barber-App",
       "title": "Classic Barber",
-      "blurb": "Booking app for barber shops with a live queue customers can watch, plus WhatsApp confirmations. Built Arabic-first.",
+      "blurb": "Booking app for barber shops with a live queue customers can watch, plus WhatsApp confirmations at every step.",
       "stack": ["Flutter", "Firebase", "Realtime"]
     },
     {

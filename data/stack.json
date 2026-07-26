@@ -1,0 +1,20 @@
+{
+  "$comment": "Grouped tech stack. Colours come from lib/theme.mjs, so a name that matches a known language picks up that language's colour automatically.",
+  "groups": [
+    {
+      "label": "languages",
+      "accent": "blue",
+      "items": ["Dart", "Python", "Java", "C++", "PHP", "JavaScript", "HTML", "CSS", "SQL"]
+    },
+    {
+      "label": "frameworks",
+      "accent": "green",
+      "items": ["Flutter", "Firebase", "Laravel", "Node.js", "Express", "MongoDB", "MySQL", "SQLite"]
+    },
+    {
+      "label": "tools",
+      "accent": "purple",
+      "items": ["Git", "Docker", "Linux", "Figma", "Postman", "VS Code", "Android Studio", "GitHub Actions"]
+    }
+  ]
+}

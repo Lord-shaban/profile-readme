@@ -1,27 +1,25 @@
 /**
  * Renders one SVG card per curated project into assets/cards/.
  *
- * Prose comes from data/projects.json; stars, forks and language come from the
- * GitHub API at build time. The README links each card, so the cards stay
- * clickable — an <a> inside an <img>-rendered SVG is not.
+ * Prose comes from data/projects.json; stars and language come from the
+ * GitHub API at build time. The README wraps each card in a link, because an
+ * <a> inside an SVG that GitHub renders through <img> is not clickable.
  */
 
-import { mkdir, writeFile } from 'node:fs/promises';
-import { readFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { fetchProfile, indexRepos } from './lib/github.mjs';
-import { esc, ink, langColor, pigment, svg, tessellation, wrap } from './lib/theme.mjs';
+import { bg, colorFor, esc, svg, syntax, wrap } from './lib/theme.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
 const W = 560;
-const H = 176;
-const PAD = 26;
+const H = 184;
+const PAD = 28;
 
-/** Five-point star, centred on (cx, cy). Drawn rather than typed so the glyph
- *  never depends on which fonts the reader's browser happens to have. */
+/** Five-point star, drawn rather than typed so it never depends on a font. */
 function star(cx, cy, r) {
   const points = [];
   for (let i = 0; i < 10; i += 1) {
@@ -33,60 +31,63 @@ function star(cx, cy, r) {
 }
 
 function chip(x, y, label, color) {
-  const width = label.length * 6.4 + 18;
-  return `<g>
-    <rect x="${x}" y="${y}" width="${width.toFixed(1)}" height="20" rx="2" fill="${color}" fill-opacity="0.10" stroke="${color}" stroke-opacity="0.34"/>
-    <text class="mono" x="${(x + width / 2).toFixed(1)}" y="${y + 14}" text-anchor="middle" font-size="10" fill="${color}" fill-opacity="0.95">${esc(label)}</text>
-  </g>`;
-  }
+  const width = label.length * 6.6 + 20;
+  return {
+    width,
+    markup: `<g>
+      <rect x="${x}" y="${y}" width="${width.toFixed(1)}" height="22" rx="5" fill="${color}" fill-opacity="0.12"/>
+      <text class="mono" x="${(x + width / 2).toFixed(1)}" y="${y + 15}" text-anchor="middle" font-size="11" fill="${color}" fill-opacity="0.95">${esc(label)}</text>
+    </g>`,
+  };
+}
 
 function card(project, repo) {
-  const accent = langColor[repo?.primaryLanguage?.name] ?? pigment.gold;
+  const language = repo?.primaryLanguage?.name;
+  const accent = colorFor(language ?? 'Other');
   const stars = repo?.stargazerCount ?? 0;
-  const lines = wrap(project.blurb, { fontSize: 11.5, maxWidth: W - PAD * 2 - 20, maxLines: 3 });
+  const lines = wrap(project.blurb, { fontSize: 13.5, maxWidth: W - PAD * 2 - 30, maxLines: 3 });
 
-  const chips = [];
   let cursor = PAD;
-  for (const label of project.stack) {
-    chips.push(chip(cursor, H - 44, label, accent));
-    cursor += label.length * 6.4 + 18 + 8;
-  }
+  const chips = project.stack.map((label) => {
+    const c = chip(cursor, H - 46, label, accent);
+    cursor += c.width + 8;
+    return c.markup;
+  });
 
   const body = `
-  <rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="2" fill="${ink.panel}" stroke="${pigment.gold}" stroke-opacity="0.28"/>
-  <rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="2" fill="url(#ground)" opacity="0.10"/>
-  <rect x="0" y="0" width="3" height="${H}" fill="${accent}" fill-opacity="0.9"/>
+  <rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="10" fill="${bg.panel}" stroke="${bg.line}"/>
+  <path d="M0 10 a10 10 0 0 1 10 -10 h1 v${H} h-1 a10 10 0 0 1 -10 -10 z" fill="${accent}"/>
 
-  <g class="anim rise">
-    <text class="serif" x="${PAD}" y="46" font-size="23" letter-spacing="0.4" fill="${pigment.gold}">${esc(project.title)}</text>
+  <g class="fx rise">
+    <circle cx="${PAD + 5}" cy="41" r="5.5" fill="${accent}"/>
+    <text class="sans" x="${PAD + 20}" y="47" font-size="19" font-weight="600" fill="${syntax.text}">${esc(project.title)}</text>
 
-    ${stars > 0 ? `<g fill="${pigment.gold}" fill-opacity="0.75" transform="translate(${W - PAD - 34} 40)">${star(0, 0, 7)}</g>
-    <text class="mono" x="${W - PAD}" y="45" text-anchor="end" font-size="12" fill="${pigment.cream}" fill-opacity="0.7">${stars}</text>` : ''}
+    ${
+      stars > 0
+        ? `<g fill="${syntax.yellow}" fill-opacity="0.9" transform="translate(${W - PAD - 26} 41)">${star(0, 0, 7)}</g>
+    <text class="mono" x="${W - PAD}" y="46" text-anchor="end" font-size="12.5" fill="${syntax.muted}">${stars}</text>`
+        : ''
+    }
 
     ${lines
       .map(
         (line, i) =>
-          `<text class="mono" x="${PAD}" y="${76 + i * 19}" font-size="11.5" fill="${pigment.cream}" fill-opacity="0.68">${esc(line)}</text>`,
+          `<text class="sans" x="${PAD}" y="${80 + i * 21}" font-size="13.5" fill="${syntax.muted}">${esc(line)}</text>`,
       )
       .join('\n    ')}
 
     ${chips.join('\n    ')}
-  </g>
-
-  <g stroke="${pigment.gold}" stroke-opacity="0.30" stroke-width="1" fill="none">
-    <path d="M${W - 14} 10 h-10 M${W - 14} 10 v10"/>
-    <path d="M${W - 14} ${H - 10} h-10 M${W - 14} ${H - 10} v-10"/>
   </g>`;
 
   return svg({
     width: W,
     height: H,
-    title: `${project.title} — ${project.blurb}`,
-    defs: tessellation('ground', { size: 64 }),
+    title: `${project.title} — ${project.blurb}${stars ? ` (${stars} stars)` : ''}`,
     style: `
-      .rise { opacity: 0; transform: translateY(6px); animation: rise .55s cubic-bezier(.2,.7,.3,1) .05s forwards; }
-      @keyframes rise { to { opacity: 1; transform: translateY(0) } }`,
+      .rise { animation: rise .5s cubic-bezier(.2,.7,.3,1) .05s backwards; }
+      @keyframes rise { from { opacity: 0; transform: translateY(6px) } to { opacity: 1; transform: none } }`,
     body,
+    background: bg.base,
   });
 }
 
@@ -98,11 +99,13 @@ await mkdir(resolve(root, 'assets/cards'), { recursive: true });
 
 for (const project of manifest.projects) {
   const repo = byName.get(project.repo.toLowerCase());
-  if (!repo) {
-    console.warn(`! ${project.repo}: not found on GitHub — card rendered without live stats`);
-  }
-  const file = resolve(root, 'assets/cards', `${project.repo.toLowerCase()}.svg`);
-  await writeFile(file, card(project, repo), 'utf8');
+  if (!repo) console.warn(`! ${project.repo}: not found on GitHub — card rendered without live stats`);
+
+  await writeFile(
+    resolve(root, 'assets/cards', `${project.repo.toLowerCase()}.svg`),
+    card(project, repo),
+    'utf8',
+  );
   console.log(`  assets/cards/${project.repo.toLowerCase()}.svg  ${repo?.stargazerCount ?? 0}★`);
 }
 

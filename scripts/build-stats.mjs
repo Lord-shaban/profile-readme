@@ -1,9 +1,9 @@
 /**
- * Renders assets/stats.svg — the profile's numbers, drawn in-house.
+ * Renders assets/stats.svg — the numbers panel.
  *
- * This exists so the profile does not depend on a third-party card service:
- * nothing to rate-limit, nothing to go down, and the result sits in the same
- * palette as every other asset. A scheduled workflow re-runs it daily.
+ * Exists so the profile depends on no third-party card service: nothing to
+ * rate-limit, nothing to go down, and the result sits in the same palette as
+ * every other asset. A scheduled workflow re-runs it daily.
  */
 
 import { readFile, writeFile } from 'node:fs/promises';
@@ -11,46 +11,39 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { fetchProfile } from './lib/github.mjs';
-import { colorFor, cornerMarks, esc, pigment, sectionRule, svg, tessellation } from './lib/theme.mjs';
+import { bg, colorFor, esc, monoWidth, svg, syntax } from './lib/theme.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
 const W = 1200;
-const H = 320;
-const PAD = 28;
+const H = 268;
+const PAD = 24;
+const GAP = 12;
 
-/** 1234 → "1,234". Keeps big numbers readable at a glance. */
 const group = (n) => n.toLocaleString('en-US');
 
-function statCell(x, width, value, label, accent) {
-  return `<g>
-    <text class="serif" x="${x + width / 2}" y="112" text-anchor="middle" font-size="46" fill="${accent}">${esc(value)}</text>
-    <text class="mono" x="${x + width / 2}" y="138" text-anchor="middle" font-size="10" letter-spacing="3" fill="${pigment.cream}" fill-opacity="0.55">${esc(label)}</text>
+function tile(x, width, { value, label, accent }, delay) {
+  return `<g class="fx pop" style="animation-delay:${delay.toFixed(2)}s">
+    <rect x="${x.toFixed(1)}" y="24" width="${width.toFixed(1)}" height="98" rx="9" fill="${bg.panel}" stroke="${bg.line}"/>
+    <rect x="${x.toFixed(1)}" y="24" width="${width.toFixed(1)}" height="3" rx="1.5" fill="${accent}" fill-opacity="0.85"/>
+    <text class="sans" x="${(x + width / 2).toFixed(1)}" y="79" text-anchor="middle" font-size="34" font-weight="600" fill="${accent}">${esc(value)}</text>
+    <text class="mono" x="${(x + width / 2).toFixed(1)}" y="102" text-anchor="middle" font-size="10" letter-spacing="1.6" fill="${syntax.muted}">${esc(label)}</text>
   </g>`;
 }
 
 function build(profile) {
   const stats = [
-    { value: group(profile.repoCount), label: 'REPOSITORIES', accent: pigment.gold },
-    { value: group(profile.stars), label: 'STARS EARNED', accent: pigment.gold },
-    { value: group(profile.contributions), label: 'CONTRIBUTIONS · 1Y', accent: pigment.verdigris },
-    { value: group(profile.pullRequests), label: 'PULL REQUESTS', accent: pigment.verdigris },
-    { value: group(profile.issues), label: 'ISSUES', accent: pigment.ochre },
-    { value: group(profile.followers), label: 'FOLLOWERS', accent: pigment.ochre },
+    { value: group(profile.repoCount), label: 'REPOSITORIES', accent: syntax.blue },
+    { value: group(profile.stars), label: 'STARS EARNED', accent: syntax.yellow },
+    { value: group(profile.contributions), label: 'CONTRIBUTIONS · 1Y', accent: syntax.green },
+    { value: group(profile.pullRequests), label: 'PULL REQUESTS', accent: syntax.purple },
+    { value: group(profile.issues), label: 'ISSUES', accent: syntax.cyan },
+    { value: group(profile.followers), label: 'FOLLOWERS', accent: syntax.orange },
   ];
 
-  const cellWidth = (W - PAD * 2) / stats.length;
-  const cells = stats
-    .map((s, i) => statCell(PAD + i * cellWidth, cellWidth, s.value, s.label, s.accent))
-    .join('\n  ');
-
-  // Dividers between stat cells, short and hairline so they group without boxing.
-  const dividers = stats
-    .slice(1)
-    .map(
-      (_, i) =>
-        `<line x1="${PAD + (i + 1) * cellWidth}" y1="76" x2="${PAD + (i + 1) * cellWidth}" y2="144" stroke="${pigment.gold}" stroke-opacity="0.16"/>`,
-    )
+  const tileWidth = (W - PAD * 2 - GAP * (stats.length - 1)) / stats.length;
+  const tiles = stats
+    .map((s, i) => tile(PAD + i * (tileWidth + GAP), tileWidth, s, 0.05 * i))
     .join('\n  ');
 
   // Language bar: top 6 by bytes written, remainder folded into "Other".
@@ -58,16 +51,15 @@ function build(profile) {
   const rest = profile.languages.slice(6).reduce((sum, l) => sum + l.share, 0);
   const segments = rest > 0.001 ? [...top, { name: 'Other', share: rest }] : top;
 
-  const barX = PAD;
-  const barY = 210;
+  const barY = 176;
+  const barH = 14;
   const barW = W - PAD * 2;
-  const barH = 16;
 
-  let cursor = barX;
+  let cursor = PAD;
   const bars = segments
     .map((lang, i) => {
       const width = lang.share * barW;
-      const rect = `<rect x="${cursor.toFixed(2)}" y="${barY}" width="${Math.max(0, width - 2).toFixed(2)}" height="${barH}" fill="${colorFor(lang.name, i)}" fill-opacity="0.9"/>`;
+      const rect = `<rect x="${cursor.toFixed(2)}" y="${barY}" width="${Math.max(0, width - 2).toFixed(2)}" height="${barH}" fill="${colorFor(lang.name, i)}"/>`;
       cursor += width;
       return rect;
     })
@@ -77,57 +69,56 @@ function build(profile) {
   const legend = segments
     .map((lang, i) => {
       const color = colorFor(lang.name, i);
-      const text = `${lang.name} ${(lang.share * 100).toFixed(1)}%`;
-      const item = `<g>
-      <rect x="${legendX}" y="${barY + 40}" width="9" height="9" fill="${color}" fill-opacity="0.85"/>
-      <text class="mono" x="${legendX + 16}" y="${barY + 49}" font-size="11" fill="${pigment.cream}" fill-opacity="0.72">${esc(text)}</text>
+      const label = `${lang.name} ${(lang.share * 100).toFixed(1)}%`;
+      const markup = `<g>
+      <circle cx="${legendX + 4}" cy="${barY + 44}" r="4.5" fill="${color}"/>
+      <text class="mono" x="${legendX + 16}" y="${barY + 48}" font-size="11.5" fill="${syntax.muted}">${esc(label)}</text>
     </g>`;
-      legendX += text.length * 6.6 + 34;
-      return item;
+      legendX += monoWidth(label, 11.5) + 40;
+      return markup;
     })
     .join('\n    ');
 
   const stamp = new Date().toISOString().slice(0, 10);
 
   const body = `
-  <rect width="${W}" height="${H}" fill="url(#ground)" opacity="0.08"/>
+  ${tiles}
 
-  ${sectionRule(PAD, 40, W - PAD * 2, 'BY THE NUMBERS')}
+  <text class="mono" x="${PAD}" y="${barY - 14}" font-size="11" letter-spacing="1.6" fill="${syntax.muted}">LANGUAGES BY BYTES WRITTEN</text>
 
-  <g class="anim rise">
-  ${cells}
-  ${dividers}
+  <rect x="${PAD}" y="${barY}" width="${barW}" height="${barH}" rx="7" fill="${bg.panel}"/>
+  <g clip-path="url(#rounded)">
+    <g class="fx sweep">
+      ${bars}
+    </g>
   </g>
-
-  ${sectionRule(PAD, 182, W - PAD * 2, 'WHAT I WRITE IN')}
-
-  <g clip-path="url(#sweep)">
-    ${bars}
-  </g>
-  <g class="anim fade">
+  <g class="fx fade">
     ${legend}
   </g>
 
-  <text class="mono" x="${W - PAD}" y="${H - 16}" text-anchor="end" font-size="9.5" letter-spacing="2" fill="${pigment.cream}" fill-opacity="0.32">GENERATED ${stamp} · SCRIPTS/BUILD-STATS.MJS</text>
-
-  ${cornerMarks(W, H)}`;
+  <text class="mono" x="${W - PAD}" y="${H - 14}" text-anchor="end" font-size="10" fill="${syntax.muted}" fill-opacity="0.7">generated ${stamp} · scripts/build-stats.mjs</text>`;
 
   return svg({
     width: W,
     height: H,
-    title: `GitHub statistics for ${profile.login}: ${profile.repoCount} repositories, ${profile.stars} stars, ${profile.commits} commits in the last year`,
-    defs: `${tessellation('ground', { size: 80 })}
-    <clipPath id="sweep">
-      <rect x="${barX}" y="${barY}" height="${barH}" width="0">
-        <animate attributeName="width" from="0" to="${barW}" dur="1.1s" begin="0.3s" fill="freeze" calcMode="spline" keySplines="0.2 0.7 0.3 1"/>
-      </rect>
-    </clipPath>`,
+    title: `GitHub statistics for ${profile.login}: ${profile.repoCount} repositories, ${profile.stars} stars, ${profile.contributions} contributions in the last year`,
+    defs: `<clipPath id="rounded"><rect x="${PAD}" y="${barY}" width="${barW}" height="${barH}" rx="7"/></clipPath>`,
     style: `
-      .rise { opacity: 0; transform: translateY(8px); animation: rise .7s cubic-bezier(.2,.7,.3,1) .1s forwards; }
-      .fade { opacity: 0; animation: fade .6s ease-out 1.1s forwards; }
-      @keyframes rise { to { opacity: 1; transform: translateY(0) } }
-      @keyframes fade { to { opacity: 1 } }`,
+      .pop  { animation: pop .5s cubic-bezier(.2,.7,.3,1) backwards; }
+      .fade { animation: fade .5s ease-out 1.1s backwards; }
+      /* The bar wipes in with a CSS transform rather than an animated clip:
+         SMIL ignores prefers-reduced-motion, so a SMIL sweep would keep
+         moving — or freeze at zero width — for readers who opted out. */
+      .sweep {
+        transform-box: view-box;
+        transform-origin: ${PAD}px ${barY}px;
+        animation: sweep .9s cubic-bezier(.2,.7,.3,1) .3s backwards;
+      }
+      @keyframes pop   { from { opacity: 0; transform: translateY(8px) } to { opacity: 1; transform: none } }
+      @keyframes fade  { from { opacity: 0 } to { opacity: 1 } }
+      @keyframes sweep { from { transform: scaleX(0) } to { transform: scaleX(1) } }`,
     body,
+    background: bg.base,
   });
 }
 
@@ -137,6 +128,6 @@ const profile = await fetchProfile(manifest.owner);
 await writeFile(resolve(root, 'assets/stats.svg'), build(profile), 'utf8');
 
 console.log(
-  `assets/stats.svg — ${profile.repoCount} repos, ${profile.stars} stars, ${profile.commits} commits, ` +
-    `${profile.languages.length} languages (top: ${profile.languages[0]?.name})`,
+  `assets/stats.svg — ${profile.repoCount} repos, ${profile.stars} stars, ` +
+    `${profile.contributions} contributions, top language ${profile.languages[0]?.name}`,
 );
